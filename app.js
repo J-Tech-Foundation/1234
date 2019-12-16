@@ -5,7 +5,7 @@ const http = require('http')
 , Kahoot = require('kahoot.js-updated')
 , app = express();
 
-const server = http.createServer(app).listen(80);
+const server = http.createServer(app).listen(process.env.PORT || 80);
 
 app.use(bp.json());
 app.use(bp.urlencoded({
