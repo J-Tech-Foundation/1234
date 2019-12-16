@@ -1,6 +1,7 @@
 const http = require('http')
 , express = require('express')
 , bp = require('body-parser')
+, pug = require('pug')
 , Kahoot = require('kahoot.js-updated')
 , app = express();
 
@@ -11,8 +12,11 @@ app.use(bp.urlencoded({
   extended: true
 }));
 
+app.set('view engine', 'pug');
+app.set('views', './');
+
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.render('index');
 });
 
 app.post('/break', (req, res) => {
