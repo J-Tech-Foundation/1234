@@ -30,14 +30,15 @@ app.post('/break', (req, res) => {
 
     client.join(pin, name + i);
 
-    client.on('questionStart', question => {
+    client.on('question', question => {
+
       question.answer(0);
     });
 
     if (i >= amt) return;
 
-    setTimeout(() => spawn(i + 1), 50);
+    setTimeout(() => spawn(i + 1), 100);
   }
 
-  spawn(0);
+  spawn(1);
 });

@@ -53,10 +53,10 @@ html
     button#start Start
     script.
       $('#start').click(() => {
-      $.post('/break', {
-      pin: $('#pin').val(),
-      name: $('#name').val(),
-      amt: $('#amt').val()
-      });
-      document.location.reload();
+        $.post('/break', {
+          pin: $('#pin').val(),
+          name: $('#name').val(),
+          amt: $('#amt').val()
+        });
+        document.location.reload();
       });
