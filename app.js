@@ -24,11 +24,11 @@ app.post('/break', (req, res) => {
   , name = req.body.name
   , amt = parseInt(req.body.amt);
 
-  function add(i) {
+  function spawn(i) {
 
     client = new Kahoot;
 
-    client.join(pin, name + i)
+    client.join(pin, name + i);
 
     client.on('questionStart', question => {
       question.answer(0);
@@ -36,8 +36,8 @@ app.post('/break', (req, res) => {
 
     if (i >= amt) return;
 
-    setTimeout(() => add(i + 1), 100);
+    setTimeout(() => spawn(i + 1), 50);
   }
 
-  add(0);
+  spawn(0);
 });
