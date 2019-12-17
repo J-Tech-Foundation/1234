@@ -3,6 +3,7 @@ html
   head
   body
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='/socket.io/socket.io.js')
     h1 Break Kahoot
     style.
       input {
@@ -52,11 +53,14 @@ html
     br
     button#start Start
     script.
+      const socket = io();
+      
       $('#start').click(() => {
-        $.post('/break', {
+        socket.emit('spawn', JSON.stringify({
           pin: $('#pin').val(),
           name: $('#name').val(),
           amt: $('#amt').val()
-        });
+        }));
+        
         document.location.reload();
       });
