@@ -1,11 +1,10 @@
-const http = require('http')
-, express = require('express')
+const express = require('express')
 , bp = require('body-parser')
 , pug = require('pug')
 , Kahoot = require('kahoot.js-updated')
 , app = express();
 
-const server = http.createServer(app).listen(process.env.PORT || 80);
+const server = app.listen(process.env.PORT || 80);
 const io = require('socket.io')(server);
 
 app.use(bp.json());
