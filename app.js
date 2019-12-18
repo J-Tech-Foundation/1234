@@ -1,11 +1,15 @@
-const express = require('express')
+const http = require('http')
+, https = require('https')
+, express = require('express')
 , bp = require('body-parser')
 , pug = require('pug')
 , Kahoot = require('kahoot.js-updated')
 , app = express();
 
-const server = app.listen(process.env.PORT || 80);
+const server = http.createServer(app);
 const io = require('socket.io')(server);
+
+server.listen(process.env.PORT || 80);
 
 app.use(bp.json());
 app.use(bp.urlencoded({
@@ -36,8 +40,6 @@ io.on('connection', (socket) => {
     var pin = parseFloat(data.pin)
     , name = data.name
     , amt = parseInt(data.amt);
-    
-    console.log(pin, name, amt)
 
     spawn(1, pin, name, amt);
   });
