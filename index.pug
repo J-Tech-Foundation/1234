@@ -42,13 +42,13 @@ html
         -webkit-appearance: none;
         margin: 0;
       }
-    input#pin(type='number', placeholder='Enter Your Game Pin')
+    input#pin(type='number', placeholder='Game Pin')
     br
     br
-    input#name(placeholder='Enter Your Bot Name')
+    input#name(placeholder='Bot Name')
     br
     br
-    input#amt(type='number', placeholder='Enter The Amount Of Bots')
+    input#amt(type='number', placeholder='Amount Of Bots')
     br
     br
     button#start Start
@@ -56,6 +56,7 @@ html
       const socket = io();
       
       $('#start').click(() => {
+        
         socket.emit('spawn', JSON.stringify({
           pin: $('#pin').val(),
           name: $('#name').val(),

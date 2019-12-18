@@ -17,6 +17,20 @@ app.use(bp.urlencoded({
 app.set('view engine', 'pug');
 app.set('views', './');
 
+function spawn(i, pin, name, amt) {
+
+  let client = new Kahoot;
+
+  client.join(pin, name + i);
+
+  client.on('questionStart', question => {
+
+    question.answer(0);
+  });
+
+  setTimeout(() => spawn(i + 1, pin, name, amt), 50);
+}
+
 io.on('connection', (socket) => {
   socket.on('spawn', (dataString) => {
     let data = JSON.parse(dataString);
@@ -25,24 +39,16 @@ io.on('connection', (socket) => {
     , name = data.name
     , amt = parseInt(data.amt);
 
-    function spawn(i) {
+    spawn(1, pin, name, amt);
+  });
 
-      let client = new Kahoot;
-
-      client.join(pin, name + i);
-
-      client.on('question', question => {
-
-        question.answer(0);
-      });
-
-      setTimeout(() => spawn(i + 1), 50);
-    }
-
-    spawn(1);
+  socket.on('join', room => {
+    socket.join(room);
   })
 });
 
 app.get('/', (req, res) => {
   res.render('index');
 });
+
+app.get('/answers')
