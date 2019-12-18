@@ -36,6 +36,8 @@ io.on('connection', (socket) => {
     var pin = parseFloat(data.pin)
     , name = data.name
     , amt = parseInt(data.amt);
+    
+    console.log(pin, name, amt)
 
     spawn(1, pin, name, amt);
   });
