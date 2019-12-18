@@ -6,10 +6,8 @@ const http = require('http')
 , Kahoot = require('kahoot.js-updated')
 , app = express();
 
-const server = http.createServer(app);
+const server = http.createServer(app).listen(process.env.PORT || 80);
 const io = require('socket.io')(server);
-
-server.listen(process.env.PORT || 80);
 
 app.use(bp.json());
 app.use(bp.urlencoded({
@@ -23,12 +21,16 @@ function spawn(i, pin, name, amt) {
 
   let client = new Kahoot;
 
+  console.log(typeof(pin), name + i);
+
   client.join(pin, name + i);
 
   client.on('questionStart', question => {
 
     question.answer(0);
   });
+
+  if (i >= amt) return;
 
   setTimeout(() => spawn(i + 1, pin, name, amt), 50);
 }
@@ -52,5 +54,3 @@ io.on('connection', (socket) => {
 app.get('/', (req, res) => {
   res.render('index');
 });
-
-app.get('/answers')
