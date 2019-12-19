@@ -21,8 +21,6 @@ function spawn(i, pin, name, amt) {
 
   let client = new Kahoot;
 
-  console.log(typeof(pin), name + i);
-
   client.join(pin, name + i);
 
   client.on('questionStart', question => {
