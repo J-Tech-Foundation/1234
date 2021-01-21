@@ -8,7 +8,7 @@
     "express": "^4.17.1",
     "kahoot.js-updated": "^1.1.20",
     "pug": "^2.0.4",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "devDependencies": {},
   "scripts": {
